@@ -27,7 +27,33 @@ class Favorites {
     load() {
         window.localStorage.setItem("@git-fav", JSON.stringify(this.entriesporenquanto))
         this.entries = JSON.parse(window.localStorage.getItem("@git-fav")) || [];
-        console.log(GitHubSearch.search('gkpavesi').then(data => console.log(data)))
+    }
+
+    async add(username) {
+        try {
+            const isUsernameEmpty = username == "";
+            const isUserRegistered = this.entries.find(user => user.login.toLowerCase() == username.toLowerCase());
+
+            if (isUsernameEmpty) {
+                throw new Error("Nome não pode ser vazio")
+            }
+            if (isUserRegistered) {
+                throw new Error("Usuário já favoritado")
+            }
+
+            const user = await GitHubSearch.search(username)
+            const isUserUndefined = (user.login == undefined && user.name == undefined && user.followers == undefined && user.public_repos == undefined)
+
+            if (isUserUndefined) {
+                throw new Error("Usuário não existe")
+            }
+
+            this.entries = [user, ...this.entries];
+            this.update();
+
+        } catch(error) {
+            alert(error)
+        }
     }
 
     update() {
@@ -64,7 +90,10 @@ class FavoritesView extends Favorites {
         super(root)
 
         this.emptyScreen = this.root.querySelector('#empty');
+        this.searchButton = this.root.querySelector('#search-button');
+        this.inputSearch = this.root.querySelector("#input-search");
 
+        this.searchButtonListener();
         this.update();
 
     }
@@ -95,6 +124,13 @@ class FavoritesView extends Favorites {
             </td>
         `
         return tr;
+    }
+
+    searchButtonListener() {
+        this.searchButton.addEventListener('click', () => {
+            this.searchButton.disabled = true;
+            this.add(this.inputSearch.value).then(() => this.searchButton.disabled = false)
+        })
     }
 
     toggleEmptyScreen() {
