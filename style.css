@@ -110,7 +110,7 @@ header button:hover svg path {
 }
 
 table {
-    margin: 8.7rem auto 0;
+    margin: 7rem auto 0;
     width: 100%;
     border-collapse: collapse;
 }
@@ -123,6 +123,10 @@ table thead {
     font-size: 2rem;
     line-height: 160%;
     color: var(--table-head-txt-color);
+
+    display: table;
+    width: 100%; 
+    table-layout: fixed;
 }
 
 table thead th {
@@ -148,12 +152,22 @@ table thead th:nth-child(4) {
     border-top-right-radius: 1.2rem;
 }
 
+table tbody {
+    display: block;
+    max-height: 62.4rem;
+    overflow-y: auto;
+}
+
 table tbody tr {
     font-family: 'Roboto', sans-serif;
     color: var(--table-body-txt-color);
     font-weight: 700;
     font-size: 2rem;
     line-height: 160%;
+
+    display: table;
+    table-layout: fixed;
+    width: 100%;
 }
 
 table tbody tr td {
@@ -165,6 +179,19 @@ table tbody tr td:nth-child(1) {
     display: flex;
     gap: 1.6rem;
     align-items: center;
+    width: 50.4rem;
+}
+
+table tbody tr td:nth-child(2) {
+    width: 21.9rem;
+}
+
+table tbody tr td:nth-child(3) {
+    width: 21.9rem;
+}
+
+table tbody tr td:nth-child(4) {
+    width: 17.8rem;
 }
 
 table tbody tr img {
@@ -237,6 +264,32 @@ table tbody tr:nth-child(even) {
     opacity: 0;
 }
 
+/* Target the scrollbar */
+::-webkit-scrollbar {
+    width: 0.6rem; /* Set the width of the scrollbar */
+    max-height: 1rem;
+  }
+  
+  /* Target the track */
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* Set the background color of the track */
+  }
+  
+  /* Target the thumb */
+  ::-webkit-scrollbar-thumb {
+    background-color: #4A808C; /* Set the background color of the thumb */
+    border-radius: 1rem; /* Set the border radius of the thumb */
+    height: 12.2rem;
+  }
+  
+  /* Target the button at the top of the scrollbar */
+  ::-webkit-scrollbar-button:vertical:start,
+  ::-webkit-scrollbar-button:vertical:end {
+    display: none;
+  }
+  
+
+
 /*
 fazer algo para remover todos
 atentar as duas telas, uma quando nao tem ninguem
@@ -249,4 +302,5 @@ apagar todos, t footer
 ver bem bordas e minimos detalhes de css
 
 detalhes css e correção de bugs
+overflow no table
 */

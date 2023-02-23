@@ -6,27 +6,15 @@ class Favorites {
 
         this.tableTbody = this.root.querySelector("table tbody");
 
-        this.load();
+        this.loadFromLocalStorage();
     }
 
-    entriesporenquanto = [
-        {
-            "login": "diego3g",
-            "name": "Diego Fernandes",
-            "public_repos": "65",
-            "followers": "12545"
-        },
-        {
-            "login": "maykbrito",
-            "name": "Mayk Brito",
-            "public_repos": "47",
-            "followers": "12577"
-        }
-    ]
-
-    load() {
-        window.localStorage.setItem("@git-fav", JSON.stringify(this.entriesporenquanto))
+    loadFromLocalStorage() {
         this.entries = JSON.parse(window.localStorage.getItem("@git-fav")) || [];
+    }
+
+    saveToLocalStorage() {
+        window.localStorage.setItem("@git-fav", JSON.stringify(this.entries))
     }
 
     async add(username) {
@@ -35,7 +23,7 @@ class Favorites {
             const isUserRegistered = this.entries.find(user => user.login.toLowerCase() == username.toLowerCase());
 
             if (isUsernameEmpty) {
-                throw new Error("Nome não pode ser vazio")
+                throw new Error("Usuário não pode ser vazio")
             }
             if (isUserRegistered) {
                 throw new Error("Usuário já favoritado")
@@ -49,11 +37,38 @@ class Favorites {
             }
 
             this.entries = [user, ...this.entries];
+            this.saveToLocalStorage();
             this.update();
 
         } catch(error) {
             alert(error)
         }
+    }
+
+    remove(element) {
+        const isOkToDelete = confirm("Tem certeza que deseja remover?")
+
+        if (isOkToDelete) {
+            this.entries = this.entries.filter(data => data.login !== element.login)
+
+            this.saveToLocalStorage();
+            this.update();
+        }
+    }
+
+}
+
+class FavoritesView extends Favorites {
+    constructor(root) {
+        super(root)
+
+        this.emptyScreen = this.root.querySelector('#empty');
+        this.searchButton = this.root.querySelector('#search-button');
+        this.inputSearch = this.root.querySelector("#input-search");
+
+        this.searchButtonListener();
+        this.update();
+
     }
 
     update() {
@@ -69,32 +84,6 @@ class Favorites {
 
             this.tableTbody.append(row);
         })
-
-    }
-
-    remove(element) {
-        const isOkToDelete = confirm("Tem certeza que deseja remover?")
-
-        if (isOkToDelete) {
-            this.entries = this.entries.filter(data => data.login !== element.login)
-
-            this.update();
-        }
-    }
-
-
-}
-
-class FavoritesView extends Favorites {
-    constructor(root) {
-        super(root)
-
-        this.emptyScreen = this.root.querySelector('#empty');
-        this.searchButton = this.root.querySelector('#search-button');
-        this.inputSearch = this.root.querySelector("#input-search");
-
-        this.searchButtonListener();
-        this.update();
 
     }
 
