@@ -154,7 +154,7 @@ table thead th:nth-child(4) {
 
 table tbody {
     display: block;
-    max-height: 62.4rem;
+    max-height: 52rem;
     overflow-y: auto;
 }
 
@@ -222,6 +222,46 @@ table tbody tr:nth-child(even) {
     background-color: var(--table-tr-even-color);
 }
 
+table tfoot {
+    background-color: var(--table-head-background);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 160%;
+    color: var(--table-txt-remove-color);
+
+    display: table;
+    width: 100%; 
+    table-layout: fixed;
+}
+
+table tfoot tr td:nth-child(1) {
+    width: 50.4rem;
+}
+
+table tfoot tr td:nth-child(2) {
+    width: 21.9rem;
+}
+
+table tfoot tr td:nth-child(3) {
+    width: 21.9rem;
+}
+
+table tfoot tr td:nth-child(4) {
+    padding: 1rem 0 1rem 4rem;
+    width: 17.8rem;
+}
+
+table tfoot.hide {
+    display: none;
+    opacity: 0;
+}
+
+#emptyAll {
+    width: 9.5rem;
+    cursor: pointer;
+}
+
 #empty {
     height: 62.4rem;
 
@@ -264,29 +304,30 @@ table tbody tr:nth-child(even) {
     opacity: 0;
 }
 
-/* Target the scrollbar */
-::-webkit-scrollbar {
-    width: 0.6rem; /* Set the width of the scrollbar */
-    max-height: 1rem;
+
+/* table tbody::-webkit-scrollbar {
+    width: 0.6rem; 
+    
   }
   
-  /* Target the track */
+  
   ::-webkit-scrollbar-track {
-    background-color: transparent; /* Set the background color of the track */
+    background-color: transparent; 
+    background-clip: content-box;
   }
   
-  /* Target the thumb */
+  
   ::-webkit-scrollbar-thumb {
-    background-color: #4A808C; /* Set the background color of the thumb */
-    border-radius: 1rem; /* Set the border radius of the thumb */
+    background-color: #4A808C; 
+    border-radius: 1rem; 
     height: 12.2rem;
   }
   
-  /* Target the button at the top of the scrollbar */
+
   ::-webkit-scrollbar-button:vertical:start,
   ::-webkit-scrollbar-button:vertical:end {
     display: none;
-  }
+  } */
   
 
 
@@ -303,4 +344,7 @@ ver bem bordas e minimos detalhes de css
 
 detalhes css e correção de bugs
 overflow no table
+
+
+ver se esta tudo certo e nao tem bugs, ver scroll que deu dor de cabeça
 */

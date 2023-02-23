@@ -56,6 +56,14 @@ class Favorites {
         }
     }
 
+    removeAllElements() {
+        const isOkayToDeleteEverything = confirm("Tem certeza que deseja apagar todos?");
+        if (isOkayToDeleteEverything) {
+            this.entries.length = 0;
+            this.saveToLocalStorage();
+            this.update();
+        }
+    }
 }
 
 class FavoritesView extends Favorites {
@@ -65,8 +73,10 @@ class FavoritesView extends Favorites {
         this.emptyScreen = this.root.querySelector('#empty');
         this.searchButton = this.root.querySelector('#search-button');
         this.inputSearch = this.root.querySelector("#input-search");
+        this.emptyAll = this.root.querySelector('#emptyAll');
+        this.tableFoot = this.root.querySelector("#tfoot");
 
-        this.searchButtonListener();
+        this.addListeners();
         this.update();
 
     }
@@ -115,17 +125,27 @@ class FavoritesView extends Favorites {
         return tr;
     }
 
-    searchButtonListener() {
+    addListeners() {
         this.searchButton.addEventListener('click', () => {
             this.searchButton.disabled = true;
             this.add(this.inputSearch.value).then(() => this.searchButton.disabled = false)
+        })
+
+        this.emptyAll.addEventListener('click', () => {
+                this.removeAllElements();
         })
     }
 
     toggleEmptyScreen() {
         const isEmpty = this.entries.length == 0
 
-        isEmpty ? this.emptyScreen.classList.remove("hide") : this.emptyScreen.classList.add("hide");
+        if (isEmpty) {
+            this.emptyScreen.classList.remove("hide");
+            this.tableFoot.classList.add("hide");
+        } else {
+            this.emptyScreen.classList.add("hide")
+            this.tableFoot.classList.remove("hide")
+        }
     }
 
 }
