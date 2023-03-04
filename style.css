@@ -155,7 +155,7 @@ table thead th:nth-child(4) {
 table tbody {
     display: block;
     max-height: 52rem;
-    overflow-y: auto;
+    overflow: overlay;
 }
 
 table tbody tr {
@@ -284,14 +284,6 @@ table tfoot.hide {
 
     margin-bottom: 15rem;
     margin-left: 19.2rem;
-    /* display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6rem; */
-
-    /* margin-top: 21rem;
-    margin-left: 19.2rem; */
-    /* margin-top: 10rem; */
 }
 
 #empty img {
@@ -304,47 +296,35 @@ table tfoot.hide {
     opacity: 0;
 }
 
-
-/* table tbody::-webkit-scrollbar {
-    width: 0.6rem; 
-    
+::-webkit-scrollbar {
+    width: 0.6rem;
   }
-  
-  
-  ::-webkit-scrollbar-track {
-    background-color: transparent; 
-    background-clip: content-box;
-  }
-  
   
   ::-webkit-scrollbar-thumb {
-    background-color: #4A808C; 
-    border-radius: 1rem; 
-    height: 12.2rem;
+    background-color: #4A808C;
   }
   
+  /* For Firefox */
+  ::-moz-scrollbar {
+    width: 0.6rem;
+  }
+  
+  ::-moz-scrollbar-thumb {
+    background-color: #4A808C;
+  }
+  
+  /* For Edge and IE */
+  ::-ms-scrollbar {
+    width: 0.6rem;
+  }
+  
+  ::-ms-scrollbar-thumb {
+    background-color: #4A808C;
+  }
 
-  ::-webkit-scrollbar-button:vertical:start,
-  ::-webkit-scrollbar-button:vertical:end {
-    display: none;
-  } */
   
 
 
 /*
-fazer algo para remover todos
-atentar as duas telas, uma quando nao tem ninguem
-deve ter scroll na table 
-ver bordas e essas coisas tudo
-atentar bem para as bordas!!
-cursor pointer no remover
-apagar todos, t footer
-
-ver bem bordas e minimos detalhes de css
-
-detalhes css e correção de bugs
-overflow no table
-
-
-ver se esta tudo certo e nao tem bugs, ver scroll que deu dor de cabeça
+finalizar scroll
 */
